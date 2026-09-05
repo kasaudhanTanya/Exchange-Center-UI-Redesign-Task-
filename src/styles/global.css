@@ -1,0 +1,739 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #161827;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #161827;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+::selection {
+  background: #d9b35b;
+  color: #161827;
+}
+
+
+
+/* =========================
+   PAGE
+========================= */
+
+.exchange-page {
+  min-height: 100vh;
+  padding: 30px 15px 60px;
+  background: #161827;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 35px;
+
+  border: 1px solid #2b3045;
+  border-radius: 25px;
+
+  background: #1d2135;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.eyebrow {
+  color: #aab3d6;
+
+  font-size: 12px;
+
+  letter-spacing: 3px;
+
+  font-weight: bold;
+}
+
+.hero h1 {
+  margin: 10px 0;
+
+  color: white;
+
+  font-size: clamp(
+    40px,
+    6vw,
+    64px
+  );
+}
+
+.hero p {
+  margin: 0;
+
+  color: #9ca5bd;
+
+  font-size: 16px;
+}
+
+.hero-visual {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  color: #d9b35b;
+}
+
+.hero-icon,
+.ve-icon {
+  width: 70px;
+  height: 70px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 20px;
+}
+
+.hero-icon {
+  background: #25314b;
+}
+
+.ve-icon {
+  background: #5c4820;
+
+  font-size: 20px;
+
+  font-weight: bold;
+}
+
+
+/* =========================
+   BALANCE
+========================= */
+
+.balance-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 18px;
+
+  margin: 22px 0;
+}
+
+.balance-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 22px;
+
+  background: #1b1f30;
+
+  border: 1px solid #2b3045;
+
+  border-radius: 20px;
+}
+
+.balance-icon {
+  width: 50px;
+  height: 50px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 15px;
+
+  background: #25314b;
+
+  color: #d9b35b;
+}
+
+.balance-card small {
+  color: #858da7;
+}
+
+.balance-card h2 {
+  margin: 5px 0 0;
+
+  color: white;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.conversion-section {
+  margin-top: 30px;
+}
+
+.section-title {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: end;
+
+  margin-bottom: 18px;
+}
+
+.section-title small {
+  color: #9da7c5;
+
+  letter-spacing: 2px;
+}
+
+.section-title h2 {
+  margin: 5px 0;
+
+  color: white;
+}
+
+.section-title p {
+  margin: 0;
+
+  color: #9ca5bd;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.conversion-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.exchange-card {
+  padding: 24px;
+
+  background: #1b1f30;
+
+  border: 1px solid #2b3045;
+
+  border-radius: 22px;
+
+  transition: 0.2s;
+}
+
+.exchange-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #58617e;
+}
+
+.gem-box {
+  width: 55px;
+  height: 55px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 16px;
+
+  background: #25314b;
+
+  color: #9ed0ff;
+}
+
+.tag {
+  display: block;
+
+  margin-top: 15px;
+
+  color: #aeb7d0;
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+}
+
+.exchange-card h3 {
+  color: white;
+}
+
+.exchange-card p {
+  color: #9ca5bd;
+
+  min-height: 45px;
+}
+
+
+/* =========================
+   CONVERSION FLOW
+========================= */
+
+.conversion-flow {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 15px;
+
+  margin: 18px 0;
+
+  background: #151827;
+
+  border-radius: 15px;
+}
+
+.conversion-flow div {
+  flex: 1;
+}
+
+.conversion-flow small {
+  display: block;
+
+  color: #858da7;
+}
+
+.conversion-flow strong {
+  display: block;
+
+  margin-top: 5px;
+
+  color: white;
+}
+
+.conversion-flow svg {
+  color: #d9b35b;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.exchange-card button {
+  width: 100%;
+
+  padding: 12px;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  background: #d9b35b;
+
+  color: #17120a;
+
+  font-weight: bold;
+}
+
+.exchange-card button:hover {
+  background: #e5c16d;
+}
+
+.exchange-card button:disabled {
+  background: #3a3f51;
+
+  color: #8e94a8;
+}
+
+
+/* =========================
+   INFO SECTIONS
+========================= */
+
+.info-section {
+  margin-top: 22px;
+
+  padding: 24px;
+
+  background: #1b1f30;
+
+  border: 1px solid #2b3045;
+
+  border-radius: 22px;
+}
+
+.info-section h2 {
+  color: white;
+
+  font-size: 20px;
+}
+
+
+/* =========================
+   HOW IT WORKS
+========================= */
+
+.steps {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 10px;
+}
+
+.step {
+  padding: 15px;
+
+  background: #151827;
+
+  border-radius: 15px;
+}
+
+.step span {
+  display: block;
+
+  color: #d9b35b;
+
+  font-weight: bold;
+}
+
+.step strong {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #e0e4f0;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+.section-heading {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.section-heading span {
+  color: #858da7;
+
+  font-size: 13px;
+}
+
+.history-item {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 15px 0;
+
+  border-top: 1px solid #2b3045;
+}
+
+.history-item strong {
+  display: block;
+
+  color: white;
+}
+
+.history-item small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #858da7;
+}
+
+.status {
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+}
+
+.completed {
+  background: #1e3b2b;
+
+  color: #83dfa5;
+}
+
+.processing {
+  background: #3d3520;
+
+  color: #f2ca67;
+}
+
+.failed {
+  background: #3d2529;
+
+  color: #ff9aa4;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.overlay {
+  position: fixed;
+
+  inset: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 15px;
+
+  background: rgba(
+    5,
+    7,
+    15,
+    0.82
+  );
+
+  z-index: 1000;
+}
+
+.modal-box,
+.success-box {
+  width: min(
+    480px,
+    100%
+  );
+
+  padding: 28px;
+
+  background: #1b1f30;
+
+  border: 1px solid #3a415d;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 25px 80px
+    rgba(0, 0, 0, 0.4);
+}
+
+.modal-box {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+
+  right: 15px;
+
+  top: 10px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 28px;
+}
+
+.modal-box h2 {
+  color: white;
+
+  margin-bottom: 22px;
+}
+
+.confirm-box {
+  display: grid;
+
+  gap: 10px;
+
+  padding: 20px;
+
+  text-align: center;
+
+  background: #151827;
+
+  border-radius: 16px;
+}
+
+.confirm-box span {
+  color: #d9b35b;
+}
+
+.after-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 14px 0;
+
+  border-bottom:
+    1px solid #2b3045;
+
+  color: #9fa7bd;
+}
+
+.after-row strong {
+  color: white;
+}
+
+.modal-buttons {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1.4fr;
+
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+.modal-buttons button {
+  padding: 12px;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  font-weight: bold;
+}
+
+.cancel-button {
+  background: #30364a;
+
+  color: white;
+}
+
+.confirm-button {
+  background: #d9b35b;
+
+  color: #17120a;
+}
+
+
+/* =========================
+   SUCCESS
+========================= */
+
+.success-box {
+  text-align: center;
+
+  color: white;
+}
+
+.success-icon {
+  color: #7ed8a0;
+}
+
+.success-box p {
+  color: #9ca5bd;
+}
+
+.success-box button {
+  margin-top: 22px;
+
+  padding: 12px 30px;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  background: #d9b35b;
+
+  font-weight: bold;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .conversion-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .exchange-page {
+    padding:
+      15px 10px 40px;
+  }
+
+  .hero {
+    padding: 25px;
+  }
+
+  .hero-visual {
+    display: none;
+  }
+
+  .balance-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .conversion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    display: block;
+  }
+
+  .section-title p {
+    margin-top: 10px;
+  }
+
+  .steps {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 400px) {
+
+  .hero h1 {
+    font-size: 35px;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+}
