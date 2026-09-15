@@ -1,0 +1,58 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 28px 0 12px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 20px 22px;
+  box-shadow: 0 10px 26px rgba(65, 44, 95, 0.08);
+}
+
+.iconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gemIcon {
+  background: var(--purple-tint);
+  color: var(--purple-light);
+}
+
+.veIcon {
+  background: var(--gold-tint);
+  color: #a87300;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.value {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

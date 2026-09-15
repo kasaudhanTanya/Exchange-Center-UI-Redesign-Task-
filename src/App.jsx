@@ -1,7 +1,5 @@
-import ExchangeCenter from "./pages/ExchangeCenter";
+import ExchangeCenter from "./pages/ExchangeCenter/ExchangeCenter.jsx";
 
-function App() {
+export default function App() {
   return <ExchangeCenter />;
 }
-
-export default App;

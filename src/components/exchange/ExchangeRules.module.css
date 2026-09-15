@@ -1,0 +1,38 @@
+.section {
+  margin: 48px 0 64px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px 26px;
+  box-shadow: 0 10px 26px rgba(65, 44, 95, 0.06);
+}
+
+.headingRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.headingIcon {
+  color: var(--blue);
+}
+
+.heading {
+  font-size: 17px;
+  color: var(--text-primary);
+}
+
+.list {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}

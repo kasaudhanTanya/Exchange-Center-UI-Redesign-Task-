@@ -1,106 +1,85 @@
-export default function ExchangeModal({
-  option,
-  gems,
-  ves,
-  loading,
-  onCancel,
-  onConfirm
-}) {
+import { useEffect, useRef } from "react";
+import { X, Gem, Coins, ArrowDown } from "lucide-react";
+import ConversionSuccess from "./ConversionSuccess.jsx";
+import styles from "./ExchangeModal.module.css";
 
-  if (!option) {
-    return null;
-  }
+export default function ExchangeModal({ option, phase, balance, onCancel, onConfirm, onClose }) {
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === "Escape" && phase !== "processing") {
+        onCancel();
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    dialogRef.current?.focus();
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [phase, onCancel]);
+
+  if (!option) return null;
+
+  const gemsAfter = balance.gems - option.requiredGems;
+  const vesAfter = balance.ves + option.receiveVEs;
 
   return (
-
-    <div className="overlay">
-
-      <div className="modal-box">
-
-        <button
-          className="close-button"
-          onClick={onCancel}
-          disabled={loading}
-        >
-          ×
-        </button>
-
-
-        <h2>
-          Confirm Conversion
-        </h2>
-
-
-        <div className="confirm-box">
-
-          <strong>
-            💎 {option.requiredGems} Gems
-          </strong>
-
-          <span>
-            ↓
-          </span>
-
-          <strong>
-            🪙 {option.receiveVEs} VEs
-          </strong>
-
-        </div>
-
-
-        <div className="after-row">
-
-          <span>
-            Gems after conversion
-          </span>
-
-          <strong>
-            {gems - option.requiredGems}
-          </strong>
-
-        </div>
-
-
-        <div className="after-row">
-
-          <span>
-            VEs after conversion
-          </span>
-
-          <strong>
-            {(ves + option.receiveVEs).toLocaleString()}
-          </strong>
-
-        </div>
-
-
-        <div className="modal-buttons">
-
-          <button
-            className="cancel-button"
-            onClick={onCancel}
-            disabled={loading}
-          >
-            Cancel
+    <div className={styles.overlay} role="presentation" onMouseDown={(e) => e.target === e.currentTarget && phase !== "processing" && onCancel()}>
+      <div
+        className={styles.dialog}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="exchange-modal-title"
+        tabIndex={-1}
+        ref={dialogRef}
+      >
+        {phase !== "processing" && (
+          <button type="button" className={styles.closeButton} aria-label="Close dialog" onClick={onCancel}>
+            <X size={18} />
           </button>
+        )}
 
-          <button
-            className="confirm-button"
-            onClick={onConfirm}
-            disabled={loading}
-          >
+        {phase === "success" ? (
+          <ConversionSuccess option={option} onContinue={onClose} />
+        ) : (
+          <>
+            <h2 id="exchange-modal-title" className={styles.title}>
+              Confirm conversion
+            </h2>
 
-            {loading
-              ? "Converting..."
-              : "Confirm Conversion"
-            }
+            <div className={styles.summary}>
+              <div className={styles.summaryRow}>
+                <Gem size={18} className={styles.gemGlyph} />
+                <span>{option.requiredGems} Gems</span>
+              </div>
+              <ArrowDown size={16} className={styles.summaryArrow} aria-hidden="true" />
+              <div className={styles.summaryRow}>
+                <Coins size={18} className={styles.veGlyph} />
+                <span>{option.receiveVEs} VEs</span>
+              </div>
+            </div>
 
-          </button>
+            <dl className={styles.afterGrid}>
+              <div>
+                <dt>Gems after conversion</dt>
+                <dd>{gemsAfter.toLocaleString()}</dd>
+              </div>
+              <div>
+                <dt>VEs after conversion</dt>
+                <dd>{vesAfter.toLocaleString()}</dd>
+              </div>
+            </dl>
 
-        </div>
-
+            <div className={styles.actions}>
+              <button type="button" className={styles.cancelButton} onClick={onCancel} disabled={phase === "processing"}>
+                Cancel
+              </button>
+              <button type="button" className={styles.confirmButton} onClick={onConfirm} disabled={phase === "processing"}>
+                {phase === "processing" ? "Converting…" : "Confirm conversion"}
+              </button>
+            </div>
+          </>
+        )}
       </div>
-
     </div>
   );
 }

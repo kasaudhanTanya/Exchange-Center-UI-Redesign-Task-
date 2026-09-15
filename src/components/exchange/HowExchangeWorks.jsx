@@ -1,45 +1,24 @@
+import { howExchangeWorks } from "../../data/exchangeData.js";
+import styles from "./HowExchangeWorks.module.css";
+
 export default function HowExchangeWorks() {
-
-  const steps = [
-    "Earn Gems",
-    "Choose Conversion",
-    "Review Exchange",
-    "Confirm",
-    "Receive VEs"
-  ];
-
   return (
-
-    <section className="info-section">
-
-      <h2>
-        How Exchange Works
+    <section className={styles.section} aria-labelledby="how-it-works-heading">
+      <h2 id="how-it-works-heading" className={styles.heading}>
+        How the exchange works
       </h2>
-
-
-      <div className="steps">
-
-        {steps.map((step, index) => (
-
-          <div
-            className="step"
-            key={step}
-          >
-
-            <span>
-              0{index + 1}
-            </span>
-
-            <strong>
-              {step}
-            </strong>
-
-          </div>
-
+      <ol className={styles.list}>
+        {howExchangeWorks.map((item, index) => (
+          <li className={styles.item} key={item.step}>
+            <span className={styles.step}>{item.step}</span>
+            <p className={styles.itemTitle}>{item.title}</p>
+            <p className={styles.itemDescription}>{item.description}</p>
+            {index < howExchangeWorks.length - 1 && (
+              <span className={styles.connector} aria-hidden="true" />
+            )}
+          </li>
         ))}
-
-      </div>
-
+      </ol>
     </section>
   );
 }

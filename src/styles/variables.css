@@ -1,0 +1,40 @@
+:root {
+  --bg: #e9d3df;
+  --surface-1: #ffffff;
+  --surface-2: #f4f5f7;
+  --surface-3: #eee4f3;
+  --border: rgba(15, 74, 196, 0.12);
+  --border-strong: rgba(15, 74, 196, 0.24);
+
+  --text-primary: #111111;
+  --text-secondary: #4f5362;
+  --text-muted: #7d8190;
+
+  --gold: #f5c542;
+  --gold-light: #f7a928;
+  --gold-dark: #bd8510;
+  --gold-tint: rgba(245, 197, 66, 0.2);
+
+  --purple: #8a5cff;
+  --purple-light: #6b42e8;
+  --purple-tint: rgba(138, 92, 255, 0.12);
+
+  --blue: #3e67f3;
+  --blue-deep: #0f4ac4;
+  --blue-sky: #6fa8ff;
+  --blue-tint: rgba(62, 103, 243, 0.11);
+
+  --green: #15966b;
+  --green-tint: rgba(21, 150, 107, 0.12);
+  --red: #d74d55;
+  --red-tint: rgba(215, 77, 85, 0.12);
+
+  --font-display: "Manrope", -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Manrope", -apple-system, "Segoe UI", sans-serif;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --shadow-card: 0 16px 38px rgba(65, 44, 95, 0.12);
+}

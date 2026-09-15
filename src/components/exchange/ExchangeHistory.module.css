@@ -1,0 +1,75 @@
+.section {
+  margin: 48px 0;
+}
+
+.heading {
+  font-size: 20px;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(65, 44, 95, 0.06);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.date {
+  color: var(--text-muted);
+}
+
+.amounts {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.statusCompleted {
+  color: var(--green);
+  background: var(--green-tint);
+}
+
+.statusPending {
+  color: #9b6d00;
+  background: var(--gold-tint);
+}
+
+.statusFailed {
+  color: var(--red);
+  background: var(--red-tint);
+}
+
+@media (max-width: 560px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

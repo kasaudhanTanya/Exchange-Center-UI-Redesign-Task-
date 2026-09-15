@@ -1,45 +1,20 @@
-import { CheckCircle2 } from "lucide-react";
+import { Check } from "lucide-react";
+import styles from "./ConversionSuccess.module.css";
 
-export default function ConversionSuccess({
-  option,
-  onContinue
-}) {
-
-  if (!option) {
-    return null;
-  }
-
+export default function ConversionSuccess({ option, onContinue }) {
   return (
-
-    <div className="overlay">
-
-      <div className="success-box">
-
-        <CheckCircle2
-          size={60}
-          className="success-icon"
-        />
-
-        <h2>
-          Conversion Complete
-        </h2>
-
-        <p>
-          {option.requiredGems} Gems converted.
-        </p>
-
-        <strong>
-          +{option.receiveVEs} VEs added to your balance.
-        </strong>
-
-        <button
-          onClick={onContinue}
-        >
-          Continue
-        </button>
-
+    <div className={styles.wrap}>
+      <div className={styles.badge}>
+        <Check size={26} strokeWidth={2.5} />
+        <span className={styles.burst} aria-hidden="true" />
       </div>
-
+      <h3 className={styles.title}>Conversion complete</h3>
+      <p className={styles.detail}>
+        {option.requiredGems} Gems converted. +{option.receiveVEs} VEs added to your balance.
+      </p>
+      <button type="button" className={styles.continueButton} onClick={onContinue}>
+        Continue
+      </button>
     </div>
   );
 }

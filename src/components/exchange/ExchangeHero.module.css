@@ -1,0 +1,94 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 56px 0 18px;
+}
+
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--blue-deep);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1.04;
+  color: var(--text-primary);
+  max-width: 10ch;
+}
+
+.subtitle {
+  margin-top: 14px;
+  max-width: 46ch;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.art {
+  flex-shrink: 0;
+}
+
+.orbit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 30px 34px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 32px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(3deg);
+}
+
+.token {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.tokenGem {
+  background: var(--purple-tint);
+  color: var(--purple-light);
+  box-shadow: 0 8px 18px rgba(138, 92, 255, 0.18);
+}
+
+.tokenVe {
+  background: var(--gold-tint);
+  color: #9b6d00;
+  box-shadow: 0 8px 18px rgba(245, 197, 66, 0.22);
+}
+
+.arrow {
+  color: var(--blue);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+@media (max-width: 780px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 32px;
+  }
+  .art {
+    align-self: stretch;
+  }
+  .orbit {
+    justify-content: center;
+  }
+}

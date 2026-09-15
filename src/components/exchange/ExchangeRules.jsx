@@ -1,34 +1,25 @@
+import { ShieldCheck } from "lucide-react";
+import InfoTooltip from "./InfoTooltip.jsx";
+import { exchangeRules, infoExplainers } from "../../data/exchangeData.js";
+import styles from "./ExchangeRules.module.css";
+
 export default function ExchangeRules() {
-
-  const rules = [
-    "Only eligible Gems can be exchanged.",
-    "Exchange rates are predefined by VELOOP Rewards.",
-    "Available conversions may vary.",
-    "A successful conversion cannot be duplicated.",
-    "Your balance is updated after successful conversion.",
-    "Platform rules apply."
-  ];
-
   return (
-
-    <section className="info-section">
-
-      <h2>
-        Exchange Rules
-      </h2>
-
-      <ul>
-
-        {rules.map((rule, index) => (
-
-          <li key={index}>
+    <section className={styles.section} aria-labelledby="rules-heading">
+      <div className={styles.headingRow}>
+        <ShieldCheck size={18} className={styles.headingIcon} aria-hidden="true" />
+        <h2 id="rules-heading" className={styles.heading}>
+          Exchange rules
+        </h2>
+        <InfoTooltip title={infoExplainers.rules.title} body={infoExplainers.rules.body} />
+      </div>
+      <ul className={styles.list}>
+        {exchangeRules.map((rule, index) => (
+          <li key={index} className={styles.item}>
             {rule}
           </li>
-
         ))}
-
       </ul>
-
     </section>
   );
 }

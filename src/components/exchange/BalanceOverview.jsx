@@ -1,73 +1,36 @@
-import {
-  Gem,
-  Coins,
-  Info
-} from "lucide-react";
+import { Gem, Coins } from "lucide-react";
+import InfoTooltip from "./InfoTooltip.jsx";
+import { infoExplainers } from "../../data/exchangeData.js";
+import styles from "./BalanceOverview.module.css";
 
-export default function BalanceOverview({
-  gems,
-  ves
-}) {
-
+export default function BalanceOverview({ gems, ves }) {
   return (
-
-    <section className="balance-grid">
-
-      {/* Gems */}
-
-      <div className="balance-card">
-
-        <div className="balance-icon">
-          <Gem size={25} />
+    <section className={styles.grid} aria-label="Your balances">
+      <div className={styles.card}>
+        <div className={`${styles.iconWrap} ${styles.gemIcon}`}>
+          <Gem size={20} strokeWidth={1.75} />
         </div>
-
-        <div>
-
-          <small>
+        <div className={styles.body}>
+          <p className={styles.label}>
             Available Gems
-          </small>
-
-          <h2>
-            {gems.toLocaleString()}
-          </h2>
-
+            <InfoTooltip title={infoExplainers.gems.title} body={infoExplainers.gems.body} />
+          </p>
+          <p className={styles.value}>{gems.toLocaleString()}</p>
         </div>
-
-        <Info
-          size={18}
-          title="Available Gems"
-        />
-
       </div>
 
-
-      {/* VEs */}
-
-      <div className="balance-card">
-
-        <div className="balance-icon">
-          <Coins size={25} />
+      <div className={styles.card}>
+        <div className={`${styles.iconWrap} ${styles.veIcon}`}>
+          <Coins size={20} strokeWidth={1.75} />
         </div>
-
-        <div>
-
-          <small>
+        <div className={styles.body}>
+          <p className={styles.label}>
             Available VEs
-          </small>
-
-          <h2>
-            {ves.toLocaleString()} VEs
-          </h2>
-
+            <InfoTooltip title={infoExplainers.ves.title} body={infoExplainers.ves.body} />
+          </p>
+          <p className={styles.value}>{ves.toLocaleString()}</p>
         </div>
-
-        <Info
-          size={18}
-          title="Available VEs"
-        />
-
       </div>
-
     </section>
   );
 }
