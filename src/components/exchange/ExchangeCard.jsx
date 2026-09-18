@@ -1,4 +1,4 @@
-import { Gem, Coins, PlayCircle, Gift, ClipboardCheck, Share2, Smartphone, ArrowRight } from "lucide-react";
+import { Gem, Coins, PlayCircle, Gift, ClipboardCheck, Share2, Smartphone, ArrowRight, Zap } from "lucide-react";
 import styles from "./ExchangeCard.module.css";
 
 const ICONS = {
@@ -15,30 +15,33 @@ export default function ExchangeCard({ option, userGems, onConvert }) {
   const missing = option.requiredGems - userGems;
 
   return (
-    <article className={styles.ticket}>
+    <article className={`${styles.ticket} ${option.highlight ? styles.highlighted : ""}`}>
+      {option.badge && (
+        <div className={styles.badge}>
+          {option.highlight && <Zap size={12} />}
+          {option.badge}
+        </div>
+      )}
+      
       <div className={styles.ticketHead}>
         <span className={styles.iconWrap}>
-          <Icon size={18} strokeWidth={1.75} />
+          <Icon size={18} strokeWidth={2} />
         </span>
         <span className={styles.label}>{option.label}</span>
       </div>
 
       <p className={styles.description}>{option.description}</p>
 
-      <div className={styles.perforation} aria-hidden="true">
-        {Array.from({ length: 14 }).map((_, i) => (
-          <span key={i} />
-        ))}
-      </div>
+      <hr className={styles.separator} />
 
       <div className={styles.conversionRow}>
         <div className={styles.amount}>
-          <Gem size={16} strokeWidth={1.75} className={styles.gemGlyph} />
+          <Gem size={16} strokeWidth={2} className={styles.gemGlyph} />
           <span>{option.requiredGems} Gems</span>
         </div>
         <ArrowRight size={16} className={styles.rowArrow} aria-hidden="true" />
         <div className={styles.amount}>
-          <Coins size={16} strokeWidth={1.75} className={styles.veGlyph} />
+          <Coins size={16} strokeWidth={2} className={styles.veGlyph} />
           <span>{option.receiveVEs} VEs</span>
         </div>
       </div>
@@ -50,7 +53,7 @@ export default function ExchangeCard({ option, userGems, onConvert }) {
       ) : (
         <div className={styles.insufficient}>
           <p className={styles.insufficientText}>
-            You need {missing} more {missing === 1 ? "Gem" : "Gems"} to unlock this conversion.
+            You need {missing} more {missing === 1 ? "Gem" : "Gems"} to unlock.
           </p>
           <button type="button" className={styles.earnButton}>
             Earn more Gems

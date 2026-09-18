@@ -1,33 +1,33 @@
 :root {
-  --bg: #e9d3df;
-  --surface-1: #ffffff;
-  --surface-2: #f4f5f7;
-  --surface-3: #eee4f3;
-  --border: rgba(15, 74, 196, 0.12);
-  --border-strong: rgba(15, 74, 196, 0.24);
+  --bg: #0f111a;
+  --surface-1: rgba(30, 33, 50, 0.6);
+  --surface-2: rgba(40, 43, 60, 0.6);
+  --surface-3: #2a2d3e;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(170, 59, 255, 0.4);
 
-  --text-primary: #111111;
-  --text-secondary: #4f5362;
-  --text-muted: #7d8190;
+  --text-primary: #ffffff;
+  --text-secondary: #949cae;
+  --text-muted: #58617e;
 
   --gold: #f5c542;
   --gold-light: #f7a928;
   --gold-dark: #bd8510;
-  --gold-tint: rgba(245, 197, 66, 0.2);
+  --gold-tint: rgba(245, 197, 66, 0.15);
 
-  --purple: #8a5cff;
-  --purple-light: #6b42e8;
-  --purple-tint: rgba(138, 92, 255, 0.12);
+  --purple: #aa3bff;
+  --purple-light: #c98cff;
+  --purple-tint: rgba(170, 59, 255, 0.15);
 
   --blue: #3e67f3;
-  --blue-deep: #0f4ac4;
+  --blue-deep: #6fa8ff;
   --blue-sky: #6fa8ff;
-  --blue-tint: rgba(62, 103, 243, 0.11);
+  --blue-tint: rgba(62, 103, 243, 0.15);
 
   --green: #15966b;
-  --green-tint: rgba(21, 150, 107, 0.12);
+  --green-tint: rgba(21, 150, 107, 0.15);
   --red: #d74d55;
-  --red-tint: rgba(215, 77, 85, 0.12);
+  --red-tint: rgba(215, 77, 85, 0.15);
 
   --font-display: "Manrope", -apple-system, "Segoe UI", sans-serif;
   --font-body: "Manrope", -apple-system, "Segoe UI", sans-serif;
@@ -36,5 +36,5 @@
   --radius-md: 16px;
   --radius-lg: 24px;
 
-  --shadow-card: 0 16px 38px rgba(65, 44, 95, 0.12);
+  --shadow-card: 0 16px 38px rgba(0, 0, 0, 0.3);
 }

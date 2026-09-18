@@ -2,114 +2,131 @@
   position: relative;
   background: var(--surface-1);
   border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 22px 22px 20px;
+  border-radius: 18px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition: border-color 0.18s ease, transform 0.18s ease;
-  box-shadow: 0 10px 26px rgba(65, 44, 95, 0.08);
-}
-
-.ticket::before,
-.ticket::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 10px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-}
-
-.ticket::before {
-  top: -6px;
-  border-radius: 0 0 20px 20px;
-  border-top: none;
-}
-
-.ticket::after {
-  bottom: 108px;
-  border-radius: 20px 20px 0 0;
-  border-bottom: none;
+  gap: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 286px;
 }
 
 .ticket:hover {
-  border-color: var(--border-strong);
-  transform: translateY(-2px);
+  border-color: rgba(170, 59, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Highlighted card styling */
+.ticket.highlighted {
+  background: linear-gradient(180deg, rgba(30, 33, 50, 0.8), rgba(20, 22, 35, 0.8));
+  border: 1px solid rgba(170, 59, 255, 0.5);
+  box-shadow: 0 0 20px rgba(170, 59, 255, 0.15);
+}
+
+.ticket.highlighted:hover {
+  border-color: rgba(170, 59, 255, 0.8);
+  box-shadow: 0 8px 30px rgba(170, 59, 255, 0.25);
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: linear-gradient(135deg, #aa3bff, #733cff);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(170, 59, 255, 0.4);
+  z-index: 2;
 }
 
 .ticketHead {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .iconWrap {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: var(--purple-tint);
-  color: var(--purple-light);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
+.highlighted .iconWrap {
+  background: rgba(170, 59, 255, 0.15);
+  color: #c98cff;
+  border-color: rgba(170, 59, 255, 0.3);
+}
+
 .label {
-  font-size: 14.5px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   color: var(--text-primary);
 }
 
 .description {
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--text-secondary);
+  flex-grow: 1;
+  margin: 0;
 }
 
-.perforation {
-  display: flex;
-  gap: 6px;
-  overflow: hidden;
+.separator {
+  border: 0;
   height: 1px;
-  margin: 2px 0;
-}
-
-.perforation span {
-  flex: 1;
-  height: 1px;
-  border-top: 1px dashed var(--border-strong);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  margin: 4px 0;
 }
 
 .conversionRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  background: linear-gradient(135deg, #f4f5f7, #edf3ff);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 14px;
 }
 
 .amount {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-family: var(--font-display);
   font-size: 15px;
   font-weight: 600;
   color: var(--text-primary);
+  min-width: 0;
+}
+
+.amount span {
+  white-space: nowrap;
 }
 
 .gemGlyph {
-  color: var(--purple-light);
+  color: #c98cff;
 }
 
 .veGlyph {
-  color: var(--gold-light);
+  color: #f7a928;
 }
 
 .rowArrow {
@@ -119,47 +136,61 @@
 
 .convertButton {
   border: none;
-  border-radius: var(--radius-sm);
-  padding: 12px 16px;
-  background: var(--blue);
-  color: #fff;
-  font-size: 14px;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fff;
+  color: #0f111a;
+  font-size: 15px;
   font-weight: 700;
-  transition: background 0.15s ease, transform 0.1s ease;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .convertButton:hover {
-  background: var(--blue-deep);
+  background: #e2e8f0;
+  transform: translateY(-1px);
 }
 
 .convertButton:active {
-  transform: scale(0.98);
+  transform: translateY(1px);
+}
+
+.highlighted .convertButton {
+  background: linear-gradient(135deg, #aa3bff, #733cff);
+  color: #fff;
+}
+
+.highlighted .convertButton:hover {
+  box-shadow: 0 4px 15px rgba(170, 59, 255, 0.4);
 }
 
 .insufficient {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .insufficientText {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--text-muted);
   line-height: 1.5;
+  margin: 0;
+  text-align: center;
 }
 
 .earnButton {
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
-  padding: 11px 16px;
-  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
   color: var(--text-secondary);
   font-size: 14px;
   font-weight: 600;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .earnButton:hover {
-  border-color: var(--blue);
-  color: var(--blue-deep);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
 }

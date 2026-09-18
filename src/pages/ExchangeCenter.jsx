@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./ExchangeCenter.module.css";
 
 import ExchangeHero
   from "../components/exchange/ExchangeHero";
@@ -185,130 +186,62 @@ export default function ExchangeCenter() {
 
 
   return (
+    <div className={styles.page}>
+      
+      {/* HERO */}
+      <ExchangeHero />
 
-    <main className="exchange-page">
+      <div className={styles.layoutGrid}>
+        
+        {/* MAIN COLUMN */}
+        <div className={styles.mainColumn}>
+          
+          <BalanceOverview gems={gems} ves={ves} />
 
-      <div className="container">
-
-        {/* HERO */}
-
-        <ExchangeHero />
-
-
-        {/* BALANCE */}
-
-        <BalanceOverview
-          gems={gems}
-          ves={ves}
-        />
-
-
-        {/* CONVERSION SECTION */}
-
-        <section className="conversion-section">
-
-          <div className="section-title">
-
-            <div>
-
-              <small>
-                REWARD OPPORTUNITIES
-              </small>
-
-              <h2>
-                Available Conversions
-              </h2>
-
+          <section>
+            <div className={styles.sectionTitle}>
+              <small>Reward Opportunities</small>
+              <h2>Available Conversions</h2>
+              <p>Select a conversion, review it, then confirm.</p>
             </div>
 
-            <p>
-              Select a conversion,
-              review it, then confirm.
-            </p>
-
-          </div>
-
-
-          <div className="conversion-grid">
-
-            {exchangeOptions.map(
-              option => (
-
+            <div className={styles.conversionGrid}>
+              {exchangeOptions.map((option) => (
                 <ExchangeCard
-
                   key={option.id}
-
                   option={option}
-
-                  onConvert={
-                    handleConvert
-                  }
-
+                  onConvert={handleConvert}
                 />
+              ))}
+            </div>
+          </section>
 
-              )
-            )}
+        </div>
 
-          </div>
-
-        </section>
-
-
-        {/* HOW IT WORKS */}
-
-        <HowExchangeWorks />
-
-
-        {/* HISTORY */}
-
-        <ExchangeHistory
-          history={history}
-        />
-
-
-        {/* RULES */}
-
-        <ExchangeRules />
+        {/* SIDE COLUMN */}
+        <div className={styles.sideColumn}>
+          <HowExchangeWorks />
+          <ExchangeRules />
+          <ExchangeHistory history={history} />
+        </div>
 
       </div>
 
-
       {/* CONFIRMATION MODAL */}
-
       <ExchangeModal
-
         option={selectedOption}
-
         gems={gems}
-
         ves={ves}
-
         loading={loading}
-
-        onCancel={() =>
-          !loading &&
-          setSelectedOption(null)
-        }
-
-        onConfirm={
-          handleConfirm
-        }
-
+        onCancel={() => !loading && setSelectedOption(null)}
+        onConfirm={handleConfirm}
       />
-
 
       {/* SUCCESS MODAL */}
-
       <ConversionSuccess
-
         option={successOption}
-
-        onContinue={() =>
-          setSuccessOption(null)
-        }
-
+        onContinue={() => setSuccessOption(null)}
       />
-
-    </main>
+    </div>
   );
 }

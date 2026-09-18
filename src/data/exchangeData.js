@@ -23,6 +23,7 @@ export const exchangeOptions = [
     requiredGems: 28,
     receiveVEs: 144,
     icon: "play-circle",
+    badge: "Quick start",
   },
   {
     id: "exchange-02",
@@ -32,6 +33,7 @@ export const exchangeOptions = [
     requiredGems: 39,
     receiveVEs: 201,
     icon: "play-circle",
+    badge: "Flexible",
   },
   {
     id: "exchange-03",
@@ -41,6 +43,8 @@ export const exchangeOptions = [
     requiredGems: 50,
     receiveVEs: 268,
     icon: "gift",
+    badge: "Best Value",
+    highlight: true,
   },
   {
     id: "exchange-04",
@@ -50,6 +54,7 @@ export const exchangeOptions = [
     requiredGems: 65,
     receiveVEs: 350,
     icon: "clipboard-check",
+    badge: "Popular",
   },
   {
     id: "exchange-05",
@@ -59,6 +64,7 @@ export const exchangeOptions = [
     requiredGems: 20,
     receiveVEs: 102,
     icon: "share",
+    badge: "Recommended",
   },
   {
     id: "exchange-06",
@@ -68,6 +74,7 @@ export const exchangeOptions = [
     requiredGems: 45,
     receiveVEs: 235,
     icon: "smartphone",
+    badge: "Popular",
   },
 ];
 

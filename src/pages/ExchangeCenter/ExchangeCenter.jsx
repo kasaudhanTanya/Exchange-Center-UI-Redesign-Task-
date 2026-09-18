@@ -25,6 +25,8 @@ export default function ExchangeCenter() {
   const [activeOption, setActiveOption] = useState(null);
   const [modalPhase, setModalPhase] = useState(null); // confirm | processing | success
 
+  const [activeTab, setActiveTab] = useState("conversions"); // conversions | history | info
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setOptions(exchangeOptions);
@@ -76,32 +78,73 @@ export default function ExchangeCenter() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <ExchangeHero />
-        <BalanceOverview gems={balance.gems} ves={balance.ves} />
+        <div className={styles.overviewGrid}>
+          <ExchangeHero />
+          <BalanceOverview gems={balance.gems} ves={balance.ves} />
+        </div>
 
-        <section className={styles.conversionsSection} aria-labelledby="conversions-heading">
-          <h2 id="conversions-heading" className={styles.conversionsHeading}>
-            Available conversions
-          </h2>
+        <div className={styles.tabsContainer}>
+          <div className={styles.tabsList}>
+            <button
+              className={`${styles.tab} ${activeTab === "conversions" ? styles.activeTab : ""}`}
+              onClick={() => setActiveTab("conversions")}
+            >
+              Available Conversions
+            </button>
+            <button
+              className={`${styles.tab} ${activeTab === "history" ? styles.activeTab : ""}`}
+              onClick={() => setActiveTab("history")}
+            >
+              Exchange History
+            </button>
+            <button
+              className={`${styles.tab} ${activeTab === "info" ? styles.activeTab : ""}`}
+              onClick={() => setActiveTab("info")}
+            >
+              How it Works & Rules
+            </button>
+          </div>
+        </div>
 
-          {loadStatus === "loading" && <ExchangeLoader />}
-
-          {loadStatus === "error" && <ErrorState onRetry={handleRetry} />}
-
-          {loadStatus === "loaded" && options.length === 0 && <EmptyState />}
-
-          {loadStatus === "loaded" && options.length > 0 && (
-            <div className={styles.grid}>
-              {options.map((option) => (
-                <ExchangeCard key={option.id} option={option} userGems={balance.gems} onConvert={openConfirm} />
-              ))}
+        {activeTab === "conversions" && (
+          <section className={styles.tabContent} aria-labelledby="conversions-heading">
+            <div className={styles.sectionHeading}>
+              <div>
+                <p className={styles.eyebrow}>Exchange menu</p>
+                <h2 id="conversions-heading">Choose how to convert</h2>
+                <p>Pick an eligible reward source to turn your Gems into VEs.</p>
+              </div>
+              <span className={styles.optionCount}>{options.length || 6} options</span>
             </div>
-          )}
-        </section>
 
-        <HowExchangeWorks />
-        <ExchangeHistory history={history} />
-        <ExchangeRules />
+            {loadStatus === "loading" && <ExchangeLoader />}
+
+            {loadStatus === "error" && <ErrorState onRetry={handleRetry} />}
+
+            {loadStatus === "loaded" && options.length === 0 && <EmptyState />}
+
+            {loadStatus === "loaded" && options.length > 0 && (
+              <div className={styles.grid}>
+                {options.map((option) => (
+                  <ExchangeCard key={option.id} option={option} userGems={balance.gems} onConvert={openConfirm} />
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {activeTab === "history" && (
+          <section className={styles.tabContent}>
+            <ExchangeHistory history={history} />
+          </section>
+        )}
+
+        {activeTab === "info" && (
+          <section className={`${styles.tabContent} ${styles.infoTab}`}>
+            <HowExchangeWorks />
+            <ExchangeRules />
+          </section>
+        )}
       </div>
 
       {modalPhase && (

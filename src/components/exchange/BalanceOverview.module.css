@@ -1,25 +1,34 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin: 28px 0 12px;
+  gap: 12px;
+  margin-bottom: 0;
+  height: 100%;
 }
 
 .card {
   display: flex;
   align-items: center;
-  gap: 14px;
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 20px 22px;
-  box-shadow: 0 10px 26px rgba(65, 44, 95, 0.08);
+  gap: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 20px;
+  background:
+    linear-gradient(145deg, rgba(31, 36, 58, 0.96), rgba(22, 25, 42, 0.96));
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
 }
 
 .iconWrap {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,28 +36,30 @@
 }
 
 .gemIcon {
-  background: var(--purple-tint);
-  color: var(--purple-light);
+  background: var(--accent-purple-light);
+  color: #c98cff;
 }
 
 .veIcon {
-  background: var(--gold-tint);
-  color: #a87300;
+  background: var(--accent-gold-light);
+  color: var(--accent-gold);
 }
 
 .label {
   display: flex;
   align-items: center;
   font-size: 13px;
+  font-weight: 500;
   color: var(--text-secondary);
 }
 
 .value {
-  margin-top: 4px;
+  margin-top: 6px;
   font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 700;
   color: var(--text-primary);
+  line-height: 1;
 }
 
 @media (max-width: 560px) {
