@@ -1,16 +1,8 @@
-import { Gem, Coins, PlayCircle, Gift, ClipboardCheck, Share2, Smartphone, ArrowRight, Zap } from "lucide-react";
+import { Gem, Coins, ArrowRight, Zap } from "lucide-react";
+import RewardArtwork from "./RewardArtwork.jsx";
 import styles from "./ExchangeCard.module.css";
 
-const ICONS = {
-  "play-circle": PlayCircle,
-  gift: Gift,
-  "clipboard-check": ClipboardCheck,
-  share: Share2,
-  smartphone: Smartphone,
-};
-
 export default function ExchangeCard({ option, userGems, onConvert }) {
-  const Icon = ICONS[option.icon] || Gift;
   const canConvert = userGems >= option.requiredGems;
   const missing = option.requiredGems - userGems;
 
@@ -22,13 +14,29 @@ export default function ExchangeCard({ option, userGems, onConvert }) {
           {option.badge}
         </div>
       )}
-      
-      <div className={styles.ticketHead}>
+      {/* <div className={styles.ticketHead}>
         <span className={styles.iconWrap}>
           <Icon size={18} strokeWidth={2} />
         </span>
         <span className={styles.label}>{option.label}</span>
-      </div>
+      </div> */}
+
+<div className={styles.ticketHead}>
+
+  <RewardArtwork conversionId={option.id} />
+
+  <div className={styles.ticketInfo}>
+    <span className={styles.label}>
+      {option.label}
+    </span>
+
+    <span className={styles.assetLabel}>
+      GEM REWARD
+    </span>
+  </div>
+
+</div>
+      
 
       <p className={styles.description}>{option.description}</p>
 

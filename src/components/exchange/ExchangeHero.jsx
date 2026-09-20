@@ -21,6 +21,7 @@ export default function ExchangeHero() {
           <span className={`${styles.token} ${styles.tokenVe}`}>VE</span>
         </div>
       </div>
+
     </header>
   );
 }
