@@ -1,6 +1,7 @@
-import { Gem, Coins } from "lucide-react";
 import InfoTooltip from "./InfoTooltip.jsx";
 import { infoExplainers } from "../../data/exchangeData.js";
+import gemImage from "../../assets/single_gem.jpeg";
+import veImage from "../../assets/single_VEs.jpeg";
 import styles from "./BalanceOverview.module.css";
 
 export default function BalanceOverview({ gems, ves }) {
@@ -8,7 +9,7 @@ export default function BalanceOverview({ gems, ves }) {
     <section className={styles.grid} aria-label="Your balances">
       <div className={styles.card}>
         <div className={`${styles.iconWrap} ${styles.gemIcon}`}>
-          <Gem size={20} strokeWidth={1.75} />
+          <img src={gemImage} alt="" />
         </div>
         <div className={styles.body}>
           <p className={styles.label}>
@@ -21,7 +22,7 @@ export default function BalanceOverview({ gems, ves }) {
 
       <div className={styles.card}>
         <div className={`${styles.iconWrap} ${styles.veIcon}`}>
-          <Coins size={20} strokeWidth={1.75} />
+          <img src={veImage} alt="" />
         </div>
         <div className={styles.body}>
           <p className={styles.label}>

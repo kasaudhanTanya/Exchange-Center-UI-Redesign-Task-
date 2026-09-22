@@ -2,18 +2,19 @@
   position: relative;
   background: var(--surface-1);
   border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 15px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  min-height: 286px;
+  min-height: 326px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
 }
 
 .ticket:hover {
   border-color: rgba(170, 59, 255, 0.3);
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
@@ -21,7 +22,7 @@
 .ticket.highlighted {
   background: linear-gradient(180deg, rgba(30, 33, 50, 0.8), rgba(20, 22, 35, 0.8));
   border: 1px solid rgba(170, 59, 255, 0.5);
-  box-shadow: 0 0 20px rgba(170, 59, 255, 0.15);
+  box-shadow: 0 12px 36px rgba(170, 59, 255, 0.14);
 }
 
 .ticket.highlighted:hover {
@@ -31,13 +32,13 @@
 
 .badge {
   position: absolute;
-  top: -12px;
-  right: 20px;
+  top: 14px;
+  right: 14px;
   background: linear-gradient(135deg, #aa3bff, #733cff);
   color: #fff;
   font-size: 11px;
   font-weight: 700;
-  padding: 4px 10px;
+  padding: 5px 9px;
   border-radius: 100px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -51,23 +52,28 @@
 .ticketHead {
   display: flex;
   align-items: center;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 10px;
   min-width: 0;
 }
 
 .assetPair {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.16);
   flex-shrink: 0;
 }
 
 .assetWrap {
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 11px;
+  border-radius: 10px;
   background: #0b0c13;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
@@ -126,13 +132,13 @@
 }
 
 .label {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .description {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.5;
   color: var(--text-secondary);
   flex-grow: 1;
@@ -155,7 +161,7 @@
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  padding: 14px;
+  padding: 12px;
 }
 
 .amount {
@@ -163,7 +169,7 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-primary);
   min-width: 0;
@@ -189,7 +195,7 @@
 .convertButton {
   border: none;
   border-radius: 12px;
-  padding: 14px;
+  padding: 13px;
   background: #fff;
   color: #0f111a;
   font-size: 15px;
@@ -245,4 +251,29 @@
 .earnButton:hover {
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
+}
+
+@media (max-width: 560px) {
+  .ticket {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .assetWrap {
+    width: 42px;
+    height: 42px;
+  }
+
+  .conversionRow {
+    padding: 11px 10px;
+  }
+
+  .amount {
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .amount span {
+    white-space: normal;
+  }
 }

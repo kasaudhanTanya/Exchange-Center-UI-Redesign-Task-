@@ -1,10 +1,14 @@
 :root {
   --bg: #0f111a;
+  --bg-app: #0d0f17;
+  --bg-page: #0d0f17;
+  --bg-card: #171b2b;
   --surface-1: rgba(30, 33, 50, 0.6);
   --surface-2: rgba(40, 43, 60, 0.6);
   --surface-3: #2a2d3e;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(170, 59, 255, 0.4);
+  --border-subtle: rgba(255, 255, 255, 0.07);
 
   --text-primary: #ffffff;
   --text-secondary: #949cae;
@@ -14,10 +18,14 @@
   --gold-light: #f7a928;
   --gold-dark: #bd8510;
   --gold-tint: rgba(245, 197, 66, 0.15);
+  --accent-gold: var(--gold-light);
+  --accent-gold-light: var(--gold-tint);
 
   --purple: #aa3bff;
   --purple-light: #c98cff;
   --purple-tint: rgba(170, 59, 255, 0.15);
+  --accent-purple: var(--purple);
+  --accent-purple-light: var(--purple-tint);
 
   --blue: #3e67f3;
   --blue-deep: #6fa8ff;
@@ -29,8 +37,8 @@
   --red: #d74d55;
   --red-tint: rgba(215, 77, 85, 0.15);
 
-  --font-display: "Manrope", -apple-system, "Segoe UI", sans-serif;
-  --font-body: "Manrope", -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --radius-sm: 10px;
   --radius-md: 16px;

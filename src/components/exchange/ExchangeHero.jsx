@@ -1,4 +1,6 @@
-import { Gem } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import gemImage from "../../assets/single_gem.jpeg";
+import veImage from "../../assets/single_VEs.jpeg";
 import styles from "./ExchangeHero.module.css";
 
 export default function ExchangeHero() {
@@ -9,16 +11,20 @@ export default function ExchangeHero() {
         <h1 className={styles.title}>Exchange your Gems for VEs</h1>
         <p className={styles.subtitle}>
           Convert your eligible Gems into VEs and continue your reward
-          journey instantly. No limits, just your rewards.
+          journey instantly.
+          <br />
+          No limits, just your rewards.
         </p>
       </div>
       <div className={styles.art} aria-hidden="true">
         <div className={styles.orbit}>
           <span className={`${styles.token} ${styles.tokenGem}`}>
-            <Gem size={20} strokeWidth={2} />
+            <img src={gemImage} alt="Gem" />
           </span>
-          <span className={styles.arrow}>→</span>
-          <span className={`${styles.token} ${styles.tokenVe}`}>VE</span>
+          <ArrowRight className={styles.arrow} aria-hidden="true" />
+          <span className={`${styles.token} ${styles.tokenVe}`}>
+            <img src={veImage} alt="VE" />
+          </span>
         </div>
       </div>
 
