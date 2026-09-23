@@ -1,5 +1,5 @@
 .balanceSection {
-  padding: 1rem 0 2rem 0;
+  padding: 1.25rem 0 2.75rem;
 }
 
 .balanceGrid {
@@ -23,12 +23,12 @@
 .balanceCard {
   background: var(--bg-card);
   border: 1px solid var(--border-card);
-  border-radius: 18px;
+  border-radius: 20px;
   padding: 1.35rem 1.4rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
@@ -105,7 +105,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.15rem;
 }
 
 .labelGroup {

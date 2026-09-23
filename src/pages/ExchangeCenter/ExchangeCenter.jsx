@@ -204,7 +204,7 @@ export default function ExchangeCenter() {
           <div className={styles.footerInner}>
             <div className={styles.footerBrand}>
               <img
-                src="/images/single_VEs.jpeg"
+                src="/images/single_VEs.png"
                 alt="VELOOP Logo"
                 className={styles.footerLogo}
               />

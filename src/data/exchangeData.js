@@ -8,7 +8,7 @@ export const initialUserBalances = {
   tokens: 3,
   userName: "Alex Mercer",
   userTier: "Gold Earner",
-  avatarUrl: "/images/tap_coin.jpeg"
+  avatarUrl: "/images/tap_coin.png"
 };
 
 export const conversionOptions = [
@@ -22,8 +22,8 @@ export const conversionOptions = [
     receiveVEs: 151,
     multiplier: "5.39x",
     explanation: "Convert your earned Gems into VEs instantly with zero waiting time.",
-    image: "/images/single_gem.jpeg",
-    outputImage: "/images/single_VEs.jpeg",
+    image: "/images/single_gem.png",
+    outputImage: "/images/single_VEs.png",
     bonusText: null,
     cooldown: "Available daily"
   },
@@ -37,8 +37,8 @@ export const conversionOptions = [
     receiveVEs: 168,
     multiplier: "4.31x",
     explanation: "Convert your task rewards into official VELOOP virtual currency.",
-    image: "/images/game_coin.jpeg",
-    outputImage: "/images/single_VEs.jpeg",
+    image: "/images/game_coin.png",
+    outputImage: "/images/single_VEs.png",
     bonusText: "+5% Vault XP",
     cooldown: "Instant credit"
   },
@@ -52,8 +52,8 @@ export const conversionOptions = [
     receiveVEs: 360,
     multiplier: "4.80x",
     explanation: "Bundle your accumulated Gems for higher VE reward efficiency.",
-    image: "/images/multi_gems.jpeg",
-    outputImage: "/images/multi_VEs.jpeg",
+    image: "/images/multi_gems.png",
+    outputImage: "/images/multi_VEs.png",
     bonusText: "+10 SVEs Bonus",
     bonusSVEs: 10,
     cooldown: "No limit"
@@ -68,8 +68,8 @@ export const conversionOptions = [
     receiveVEs: 650,
     multiplier: "5.42x",
     explanation: "Includes a Lucky Spin voucher to spin and win extra rewards.",
-    image: "/images/signle_spin.jpeg",
-    outputImage: "/images/multi_VEs.jpeg",
+    image: "/images/signle_spin.png",
+    outputImage: "/images/multi_VEs.png",
     bonusText: "+1 Spin Voucher",
     cooldown: "Weekly special"
   },
@@ -83,8 +83,8 @@ export const conversionOptions = [
     receiveVEs: 1420,
     multiplier: "5.68x",
     explanation: "Premium conversion bundle for high-activity collectors.",
-    image: "/images/Signle_Token.jpeg",
-    outputImage: "/images/multi_VEs.jpeg",
+    image: "/images/Signle_Token.png",
+    outputImage: "/images/multi_VEs.png",
     bonusText: "+1 Golden Token",
     cooldown: "VIP tier"
   },
@@ -98,8 +98,8 @@ export const conversionOptions = [
     receiveVEs: 3100,
     multiplier: "6.20x",
     explanation: "Our highest reward vault package with maximum VE output rate.",
-    image: "/images/tap_coin.jpeg",
-    outputImage: "/images/multi_VEs.jpeg",
+    image: "/images/tap_coin.png",
+    outputImage: "/images/multi_VEs.png",
     bonusText: "+50 SVEs & Elite Badge",
     bonusSVEs: 50,
     cooldown: "Milestone unlocked"

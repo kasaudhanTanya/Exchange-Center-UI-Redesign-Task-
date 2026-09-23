@@ -74,7 +74,7 @@ export default function ExchangeModal({
             <div className={styles.tokenRow}>
               <div className={styles.tokenColLeft}>
                 <img
-                  src="/images/single_gem.jpeg"
+                  src="/images/single_gem.png"
                   alt="Gems to deduct"
                   className={styles.tokenAvatar}
                 />
@@ -101,7 +101,7 @@ export default function ExchangeModal({
             <div className={styles.tokenRow}>
               <div className={styles.tokenColLeft}>
                 <img
-                  src="/images/single_VEs.jpeg"
+                  src="/images/single_VEs.png"
                   alt="VEs to credit"
                   className={styles.tokenAvatar}
                 />

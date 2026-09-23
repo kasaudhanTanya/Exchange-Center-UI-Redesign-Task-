@@ -42,7 +42,7 @@ export default function BalanceOverview({ balances, onOpenEarnModal, recentDelta
             <div className={styles.cardBody}>
               <div className={styles.assetVisualWrapper}>
                 <img
-                  src="/images/single_gem.jpeg"
+                  src="/images/single_gem.png"
                   alt="Available Gems"
                   className={styles.assetImg}
                 />
@@ -92,7 +92,7 @@ export default function BalanceOverview({ balances, onOpenEarnModal, recentDelta
             <div className={styles.cardBody}>
               <div className={styles.assetVisualWrapper}>
                 <img
-                  src="/images/single_VEs.jpeg"
+                  src="/images/single_VEs.png"
                   alt="Available VEs"
                   className={styles.assetImg}
                 />
@@ -137,7 +137,7 @@ export default function BalanceOverview({ balances, onOpenEarnModal, recentDelta
               <div className={styles.auxItem}>
                 <div className={styles.auxAssetIconWrapper}>
                   <img
-                    src="/images/single_SVEs.jpeg"
+                    src="/images/single_SVEs.png"
                     alt="SVEs Bonus Coin"
                     className={styles.auxAssetIcon}
                   />
@@ -153,7 +153,7 @@ export default function BalanceOverview({ balances, onOpenEarnModal, recentDelta
               <div className={styles.auxItem}>
                 <div className={styles.auxAssetIconWrapper}>
                   <img
-                    src="/images/Signle_Token.jpeg"
+                    src="/images/Signle_Token.png"
                     alt="Golden Token"
                     className={styles.auxAssetIcon}
                   />

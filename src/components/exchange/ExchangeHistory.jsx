@@ -100,12 +100,12 @@ export default function ExchangeHistory({ history }) {
                       <td className={styles.flowCell}>
                         <div className={styles.flowWrapper}>
                           <span className={styles.gemVal}>
-                            <img src="/images/single_gem.jpeg" alt="" className={styles.microIcon} />
+                            <img src="/images/single_gem.png" alt="" className={styles.microIcon} />
                             {item.requiredGems} Gems
                           </span>
                           <span className={styles.flowArrow}>➔</span>
                           <span className={styles.veVal}>
-                            <img src="/images/single_VEs.jpeg" alt="" className={styles.microIcon} />
+                            <img src="/images/single_VEs.png" alt="" className={styles.microIcon} />
                             {item.receiveVEs.toLocaleString()} VEs
                           </span>
                         </div>

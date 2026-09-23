@@ -16,7 +16,7 @@ export default function Navbar({ balances, onOpenEarnModal }) {
           <div className={styles.brand}>
             <div className={styles.logoBadge}>
               <img
-                src="/images/single_VEs.jpeg"
+                src="/images/single_VEs.png"
                 alt="VELOP Logo"
                 className={styles.logoImg}
               />
@@ -45,7 +45,7 @@ export default function Navbar({ balances, onOpenEarnModal }) {
             {/* Quick Gem balance */}
             <div className={`${styles.balancePill} ${styles.gemPill}`}>
               <img
-                src="/images/single_gem.jpeg"
+                src="/images/single_gem.png"
                 alt="Gems"
                 className={styles.pillIcon}
               />
@@ -56,7 +56,7 @@ export default function Navbar({ balances, onOpenEarnModal }) {
             {/* Quick VE balance */}
             <div className={`${styles.balancePill} ${styles.vePill}`}>
               <img
-                src="/images/single_VEs.jpeg"
+                src="/images/single_VEs.png"
                 alt="VEs"
                 className={styles.pillIcon}
               />
@@ -68,7 +68,7 @@ export default function Navbar({ balances, onOpenEarnModal }) {
           {/* User profile avatar pill */}
           <div className={styles.userProfile}>
             <img
-              src="/images/tap_coin.jpeg"
+              src="/images/tap_coin.png"
               alt="User Avatar"
               className={styles.avatarImg}
             />

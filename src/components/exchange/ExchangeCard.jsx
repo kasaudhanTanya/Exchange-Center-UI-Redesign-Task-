@@ -61,7 +61,7 @@ export default function ExchangeCard({ option, userGems, onSelectConversion, onO
       <div className={styles.conversionBlock}>
         <div className={styles.tokenBox}>
           <span className={styles.tokenAmount}>
-            <img src="/images/single_gem.jpeg" alt="" className={styles.tokenMicroIcon} />
+            <img src="/images/single_gem.png" alt="" className={styles.tokenMicroIcon} />
             {option.requiredGems}
           </span>
           <span className={styles.tokenName}>Gems</span>
@@ -74,7 +74,7 @@ export default function ExchangeCard({ option, userGems, onSelectConversion, onO
 
         <div className={styles.tokenBoxVe}>
           <span className={styles.tokenAmountVe}>
-            <img src="/images/single_VEs.jpeg" alt="" className={styles.tokenMicroIcon} />
+            <img src="/images/single_VEs.png" alt="" className={styles.tokenMicroIcon} />
             {option.receiveVEs.toLocaleString()}
           </span>
           <span className={styles.tokenNameVe}>VEs</span>

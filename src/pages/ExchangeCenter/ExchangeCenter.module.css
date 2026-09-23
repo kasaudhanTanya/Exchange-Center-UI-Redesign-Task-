@@ -7,7 +7,7 @@
 
 .mainContent {
   flex: 1;
-  padding-bottom: 5rem; /* space for the demo controls bar */
+  padding-bottom: 2rem;
 }
 
 .sectionSep {

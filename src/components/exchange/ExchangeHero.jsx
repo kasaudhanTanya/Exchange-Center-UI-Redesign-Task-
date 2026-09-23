@@ -71,7 +71,7 @@ export default function ExchangeHero({ onScrollToConversions }) {
               <div className={styles.nodeGem}>
                 <div className={styles.imgWrapperGem}>
                   <img
-                    src="/images/single_gem.jpeg"
+                    src="/images/single_gem.png"
                     alt="Luminous Purple Gem"
                     className={`${styles.heroImage} animate-float`}
                   />
@@ -98,7 +98,7 @@ export default function ExchangeHero({ onScrollToConversions }) {
               <div className={styles.nodeVe}>
                 <div className={styles.imgWrapperVe}>
                   <img
-                    src="/images/single_VEs.jpeg"
+                    src="/images/single_VEs.png"
                     alt="Golden VELOOP VE Coin"
                     className={`${styles.heroImage} animate-float`}
                     style={{ animationDelay: '1.2s' }}

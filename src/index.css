@@ -7,15 +7,15 @@
 
 :root {
   /* Color Palette */
-  --bg-main: #161827;
-  --bg-card: #1c1f33;
-  --bg-card-hover: #222640;
+  --bg-main: #0f1220;
+  --bg-card: #181c30;
+  --bg-card-hover: #222844;
   --bg-surface: #111320;
   --bg-modal-backdrop: rgba(10, 12, 22, 0.85);
   
   /* Borders & Dividers */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-card: rgba(255, 255, 255, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-card: rgba(255, 255, 255, 0.14);
   --border-glow-purple: rgba(168, 85, 247, 0.35);
   --border-glow-gold: rgba(251, 191, 36, 0.35);
 
@@ -57,9 +57,9 @@
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
   /* Elevation Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.32);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.42);
   --shadow-glow-purple: 0 0 24px rgba(168, 85, 247, 0.2);
   --shadow-glow-gold: 0 0 24px rgba(251, 191, 36, 0.2);
 
@@ -93,10 +93,11 @@ html, body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-main);
-  background-image: 
-    radial-gradient(ellipse 60% 40% at 50% -10%, rgba(99, 102, 241, 0.15), transparent 70%),
-    radial-gradient(ellipse 40% 30% at 90% 40%, rgba(168, 85, 247, 0.08), transparent 70%),
-    radial-gradient(ellipse 40% 30% at 10% 70%, rgba(251, 191, 36, 0.06), transparent 70%);
+  background-image:
+    radial-gradient(ellipse 70% 42% at 50% -8%, rgba(99, 102, 241, 0.2), transparent 68%),
+    radial-gradient(ellipse 45% 35% at 100% 30%, rgba(168, 85, 247, 0.1), transparent 70%),
+    radial-gradient(ellipse 45% 35% at 0% 72%, rgba(251, 191, 36, 0.07), transparent 70%),
+    linear-gradient(180deg, #111426 0%, #0f1220 55%, #0d101c 100%);
   background-attachment: fixed;
 }
 
@@ -119,6 +120,14 @@ button {
   outline: none;
   cursor: pointer;
   background: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gem-purple-light);
+  outline-offset: 3px;
 }
 
 a {

@@ -9,10 +9,10 @@ export default function ExchangeLoader() {
         <div className={styles.orbitRing}>
           <div className={styles.orbitInner}></div>
           <div className={styles.gemOrbit}>
-            <img src="/images/single_gem.jpeg" alt="" className={styles.orbitImgGem} />
+            <img src="/images/single_gem.png" alt="" className={styles.orbitImgGem} />
           </div>
           <div className={styles.veOrbit}>
-            <img src="/images/single_VEs.jpeg" alt="" className={styles.orbitImgVe} />
+            <img src="/images/single_VEs.png" alt="" className={styles.orbitImgVe} />
           </div>
         </div>
 
