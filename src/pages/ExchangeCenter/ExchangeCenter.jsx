@@ -1,160 +1,257 @@
-import { useEffect, useState } from "react";
-import ExchangeHero from "../../components/exchange/ExchangeHero.jsx";
-import BalanceOverview from "../../components/exchange/BalanceOverview.jsx";
-import HowExchangeWorks from "../../components/exchange/HowExchangeWorks.jsx";
-import ExchangeCard from "../../components/exchange/ExchangeCard.jsx";
-import ExchangeModal from "../../components/exchange/ExchangeModal.jsx";
-import ExchangeHistory from "../../components/exchange/ExchangeHistory.jsx";
-import ExchangeRules from "../../components/exchange/ExchangeRules.jsx";
-import ExchangeLoader from "../../components/exchange/ExchangeLoader.jsx";
-import EmptyState from "../../components/exchange/EmptyState.jsx";
-import ErrorState from "../../components/exchange/ErrorState.jsx";
+import React, { useState, useRef, useCallback } from 'react';
+import { AlertCircle, RefreshCw } from 'lucide-react';
+
+import Navbar from '../../components/common/Navbar';
+import DemoControls from '../../components/common/DemoControls';
+import ExchangeHero from '../../components/exchange/ExchangeHero';
+import BalanceOverview from '../../components/exchange/BalanceOverview';
+import HowExchangeWorks from '../../components/exchange/HowExchangeWorks';
+import ExchangeGrid from '../../components/exchange/ExchangeGrid';
+import ExchangeModal from '../../components/exchange/ExchangeModal';
+import ConversionSuccess from '../../components/exchange/ConversionSuccess';
+import InsufficientGemsModal from '../../components/exchange/InsufficientGemsModal';
+import ExchangeHistory from '../../components/exchange/ExchangeHistory';
+import ExchangeRules from '../../components/exchange/ExchangeRules';
+import ExchangeLoader from '../../components/exchange/ExchangeLoader';
+
 import {
-  userBalance as initialBalance,
-  exchangeOptions,
-  exchangeHistory as initialHistory,
-} from "../../data/exchangeData.js";
-import styles from "./ExchangeCenter.module.css";
+  initialUserBalances,
+  conversionOptions,
+  initialHistory
+} from '../../data/exchangeData';
+
+import styles from './ExchangeCenter.module.css';
 
 export default function ExchangeCenter() {
-  const [loadStatus, setLoadStatus] = useState("loading"); // loading | loaded | error
-  const [options, setOptions] = useState([]);
-  const [balance, setBalance] = useState(initialBalance);
+  // ── Core State ──────────────────────────────────────────────
+  const [balances, setBalances] = useState(initialUserBalances);
   const [history, setHistory] = useState(initialHistory);
 
-  const [activeOption, setActiveOption] = useState(null);
-  const [modalPhase, setModalPhase] = useState(null); // confirm | processing | success
+  // ── Modal State ──────────────────────────────────────────────
+  const [selectedOption, setSelectedOption] = useState(null);        // confirmation modal
+  const [successDetails, setSuccessDetails] = useState(null);        // success modal
+  const [insufficientOption, setInsufficientOption] = useState(null); // earn-more modal
 
-  const [activeTab, setActiveTab] = useState("conversions"); // conversions | history | info
+  // ── Balance change animation trigger ─────────────────────────
+  const [balanceDelta, setBalanceDelta] = useState(0); // increments on conversion
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setOptions(exchangeOptions);
-      setLoadStatus("loaded");
-    }, 900);
-    return () => clearTimeout(timer);
+  // ── Demo / Reviewer State ─────────────────────────────────────
+  const [demoMode, setDemoMode] = useState('normal'); // 'normal' | 'loading' | 'empty' | 'error'
+
+  // ── Section Refs ──────────────────────────────────────────────
+  const conversionsRef = useRef(null);
+  const historyRef = useRef(null);
+
+  // ── Handlers ─────────────────────────────────────────────────
+  const scrollToConversions = useCallback(() => {
+    conversionsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, []);
 
-  function handleRetry() {
-    setLoadStatus("loading");
-    setTimeout(() => {
-      setOptions(exchangeOptions);
-      setLoadStatus("loaded");
-    }, 800);
-  }
+  const scrollToHistory = useCallback(() => {
+    historyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
 
-  function openConfirm(option) {
-    setActiveOption(option);
-    setModalPhase("confirm");
-  }
+  /** User selects a conversion card — open confirmation modal */
+  const handleSelectConversion = useCallback((option) => {
+    setSelectedOption(option);
+  }, []);
 
-  function closeModal() {
-    setActiveOption(null);
-    setModalPhase(null);
-  }
+  /** User does not have enough gems — open earn-more modal */
+  const handleOpenEarnModal = useCallback((option) => {
+    setInsufficientOption(option);
+  }, []);
 
-  function handleConfirm() {
-    if (!activeOption || modalPhase === "processing") return;
-    setModalPhase("processing");
-    setTimeout(() => {
-      setBalance((prev) => ({
-        gems: prev.gems - activeOption.requiredGems,
-        ves: prev.ves + activeOption.receiveVEs,
-      }));
-      setHistory((prev) => [
-        {
-          id: `hist-${Date.now()}`,
-          date: "Today",
-          requiredGems: activeOption.requiredGems,
-          receiveVEs: activeOption.receiveVEs,
-          status: "completed",
-        },
-        ...prev,
-      ]);
-      setModalPhase("success");
-    }, 1400);
-  }
+  /** Simulate earning gems from the insufficient-gems modal shortcut */
+  const handleSimulateEarn = useCallback((amount) => {
+    setBalances(prev => ({ ...prev, gems: prev.gems + amount }));
+    setInsufficientOption(null);
+  }, []);
+
+  /** User confirms conversion in modal */
+  const handleConfirmConversion = useCallback((option) => {
+    // Deduct gems, credit VEs, update SVEs/tokens if bonus
+    setBalances(prev => ({
+      ...prev,
+      gems: prev.gems - option.requiredGems,
+      ves: prev.ves + option.receiveVEs,
+      sves: option.bonusSVEs ? prev.sves + option.bonusSVEs : prev.sves
+    }));
+
+    // Add new history entry at the top
+    const newEntry = {
+      id: `hist-${Date.now()}`,
+      date: 'Just now',
+      requiredGems: option.requiredGems,
+      receiveVEs: option.receiveVEs,
+      title: option.title,
+      status: 'completed',
+      statusLabel: 'Completed',
+      txRef: `VLP-${Math.floor(Math.random() * 90000) + 10000}`
+    };
+    setHistory(prev => [newEntry, ...prev]);
+
+    // Trigger balance animation
+    setBalanceDelta(prev => prev + 1);
+
+    // Close confirmation modal, open success modal
+    setSelectedOption(null);
+    setSuccessDetails(option);
+  }, []);
+
+  const handleCloseSuccess = useCallback(() => {
+    setSuccessDetails(null);
+  }, []);
+
+  const handleCloseConfirmation = useCallback(() => {
+    setSelectedOption(null);
+  }, []);
+
+  const handleCloseInsufficient = useCallback(() => {
+    setInsufficientOption(null);
+  }, []);
+
+  // ── Demo mode controls ────────────────────────────────────────
+  const handleSetDemoMode = useCallback((mode) => {
+    setDemoMode(mode);
+  }, []);
+
+  const handleResetDemo = useCallback(() => {
+    setDemoMode('normal');
+  }, []);
+
+  // ── Retry Handler ─────────────────────────────────────────────
+  const handleRetry = useCallback(() => {
+    setDemoMode('normal');
+  }, []);
+
+  // ── Determine what catalog to display based on demo mode ───────
+  const visibleOptions = demoMode === 'empty' ? [] : conversionOptions;
 
   return (
     <div className={styles.page}>
-      <div className={styles.container}>
-        <div className={styles.overviewGrid}>
-          <ExchangeHero />
-          <BalanceOverview gems={balance.gems} ves={balance.ves} />
+      {/* ── Sticky Navbar ── */}
+      <Navbar balances={balances} onOpenEarnModal={() => handleOpenEarnModal(null)} />
+
+      {/* ── Main Content ── */}
+      <main className={styles.mainContent}>
+
+        {/* ── Hero Section ── */}
+        <ExchangeHero onScrollToConversions={scrollToConversions} />
+
+        {/* ── Separator ── */}
+        <div className={styles.sectionSep}></div>
+
+        {/* ── Balance Overview ── */}
+        <BalanceOverview
+          balances={balances}
+          onOpenEarnModal={() => handleOpenEarnModal(null)}
+          recentDelta={balanceDelta}
+        />
+
+        {/* ── How It Works ── */}
+        <div className={styles.sectionSep}></div>
+        <HowExchangeWorks />
+
+        {/* ── Exchange Catalog Section (with demo state handling) ── */}
+        <div className={styles.sectionSep}></div>
+        <div ref={conversionsRef}>
+          {demoMode === 'loading' && <ExchangeLoader />}
+
+          {demoMode === 'error' && (
+            <div className={styles.errorState}>
+              <div className={styles.errorCard}>
+                <AlertCircle size={36} className={styles.errorIcon} />
+                <h3 className={styles.errorTitle}>Unable to Load Conversions</h3>
+                <p className={styles.errorDesc}>
+                  We couldn't fetch the latest exchange packages. Please check your connection and try again.
+                </p>
+                <button
+                  type="button"
+                  className={styles.retryBtn}
+                  onClick={handleRetry}
+                >
+                  <RefreshCw size={16} />
+                  <span>Retry</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {(demoMode === 'normal' || demoMode === 'empty') && (
+            <ExchangeGrid
+              options={visibleOptions}
+              userGems={balances.gems}
+              onSelectConversion={handleSelectConversion}
+              onOpenEarnModal={handleOpenEarnModal}
+            />
+          )}
         </div>
 
-        <div className={styles.tabsContainer}>
-          <div className={styles.tabsList}>
-            <button
-              className={`${styles.tab} ${activeTab === "conversions" ? styles.activeTab : ""}`}
-              onClick={() => setActiveTab("conversions")}
-            >
-              Available Conversions
-            </button>
-            <button
-              className={`${styles.tab} ${activeTab === "history" ? styles.activeTab : ""}`}
-              onClick={() => setActiveTab("history")}
-            >
-              Exchange History
-            </button>
-            <button
-              className={`${styles.tab} ${activeTab === "info" ? styles.activeTab : ""}`}
-              onClick={() => setActiveTab("info")}
-            >
-              How it Works & Rules
-            </button>
+        {/* ── Exchange History ── */}
+        <div className={styles.sectionSep}></div>
+        <div ref={historyRef}>
+          <ExchangeHistory history={history} />
+        </div>
+
+        {/* ── Rules & FAQ ── */}
+        <div className={styles.sectionSep}></div>
+        <ExchangeRules />
+      </main>
+
+      {/* ── Footer ── */}
+      <footer className={styles.footer}>
+        <div className="container-custom">
+          <div className={styles.footerInner}>
+            <div className={styles.footerBrand}>
+              <img
+                src="/images/single_VEs.jpeg"
+                alt="VELOOP Logo"
+                className={styles.footerLogo}
+              />
+              <div>
+                <span className={styles.footerBrandName}>VELOOP Rewards</span>
+                <span className={styles.footerBrandTag}>Official Exchange Center</span>
+              </div>
+            </div>
+            <div className={styles.footerNote}>
+              <p>VEs and Gems are virtual reward currencies. Not financial instruments.</p>
+              <p>© 2026 VELOOP Rewards. All rights reserved.</p>
+            </div>
           </div>
         </div>
+      </footer>
 
-        {activeTab === "conversions" && (
-          <section className={styles.tabContent} aria-labelledby="conversions-heading">
-            <div className={styles.sectionHeading}>
-              <div>
-                <p className={styles.eyebrow}>Exchange menu</p>
-                <h2 id="conversions-heading">Choose how to convert</h2>
-                <p>Pick an eligible reward source to turn your Gems into VEs.</p>
-              </div>
-              <span className={styles.optionCount}>{options.length || 6} options</span>
-            </div>
+      {/* ── Floating Demo Controls (always visible) ── */}
+      <DemoControls
+        demoMode={demoMode}
+        onSetMode={handleSetDemoMode}
+        onReset={handleResetDemo}
+      />
 
-            {loadStatus === "loading" && <ExchangeLoader />}
-
-            {loadStatus === "error" && <ErrorState onRetry={handleRetry} />}
-
-            {loadStatus === "loaded" && options.length === 0 && <EmptyState />}
-
-            {loadStatus === "loaded" && options.length > 0 && (
-              <div className={styles.grid}>
-                {options.map((option) => (
-                  <ExchangeCard key={option.id} option={option} userGems={balance.gems} onConvert={openConfirm} />
-                ))}
-              </div>
-            )}
-          </section>
-        )}
-
-        {activeTab === "history" && (
-          <section className={styles.tabContent}>
-            <ExchangeHistory history={history} />
-          </section>
-        )}
-
-        {activeTab === "info" && (
-          <section className={`${styles.tabContent} ${styles.infoTab}`}>
-            <HowExchangeWorks />
-            <ExchangeRules />
-          </section>
-        )}
-      </div>
-
-      {modalPhase && (
+      {/* ── Modal Layer ── */}
+      {selectedOption && (
         <ExchangeModal
-          option={activeOption}
-          phase={modalPhase}
-          balance={balance}
-          onCancel={closeModal}
-          onConfirm={handleConfirm}
-          onClose={closeModal}
+          option={selectedOption}
+          userBalances={balances}
+          onClose={handleCloseConfirmation}
+          onConfirm={handleConfirmConversion}
+        />
+      )}
+
+      {successDetails && (
+        <ConversionSuccess
+          conversionDetails={successDetails}
+          onClose={handleCloseSuccess}
+          onViewHistory={scrollToHistory}
+        />
+      )}
+
+      {insufficientOption !== null && (
+        <InsufficientGemsModal
+          targetOption={insufficientOption}
+          userGems={balances.gems}
+          onClose={handleCloseInsufficient}
+          onSimulateEarn={handleSimulateEarn}
         />
       )}
     </div>

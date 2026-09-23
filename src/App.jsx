@@ -1,10 +1,11 @@
-import ExchangeCenter from "./pages/ExchangeCenter/ExchangeCenter.jsx";
-import DashboardLayout from "./components/layout/DashboardLayout.jsx";
+import React from 'react';
+import ExchangeCenter from './pages/ExchangeCenter/ExchangeCenter';
+import './index.css';
+// Reset vite default App.css
+import './App.css';
 
-export default function App() {
-  return (
-    <DashboardLayout>
-      <ExchangeCenter />
-    </DashboardLayout>
-  );
+function App() {
+  return <ExchangeCenter />;
 }
+
+export default App;

@@ -1,122 +1,263 @@
-/**
- * Exchange Center — data layer
- *
- * NOTE ON VALUES: requiredGems for exchange-01 and exchange-02 are taken
- * from the reference screenshot (28 and 39 Gems). The receiveVEs figures
- * are placeholder/dummy values (a ~5.1x conversion rate) since the
- * reference screenshot did not expose the VE side of those two cards.
- * Replace `receiveVEs` (and add/remove entries) with the live values
- * from the current implementation before shipping.
- */
+// Centralized Data Architecture for VELOOP Rewards Exchange Center
+// As specified in PDF Section 35: structured data file to enable clean frontend logic & future backend APIs.
 
-export const userBalance = {
-  gems: 42,
+export const initialUserBalances = {
+  gems: 420,
   ves: 3850,
+  sves: 125,
+  tokens: 3,
+  userName: "Alex Mercer",
+  userTier: "Gold Earner",
+  avatarUrl: "/images/tap_coin.jpeg"
 };
 
-export const exchangeOptions = [
+export const conversionOptions = [
   {
-    id: "exchange-01",
-    type: "gem-to-ve",
-    label: "Watch Ad Conversion",
-    description: "Convert Gems earned from watching a rewarded ad into VEs.",
+    id: "conv-01",
+    title: "Daily Quick Conversion",
+    rewardType: "Daily Gem Conversion",
+    category: "Daily",
+    badge: "Popular Daily",
     requiredGems: 28,
-    receiveVEs: 144,
-    icon: "play-circle",
-    badge: "Quick start",
+    receiveVEs: 151,
+    multiplier: "5.39x",
+    explanation: "Convert your earned Gems into VEs instantly with zero waiting time.",
+    image: "/images/single_gem.jpeg",
+    outputImage: "/images/single_VEs.jpeg",
+    bonusText: null,
+    cooldown: "Available daily"
   },
   {
-    id: "exchange-02",
-    type: "gem-to-ve",
-    label: "Watch Ad Conversion",
-    description: "Convert Gems earned from watching a rewarded ad into VEs.",
+    id: "conv-02",
+    title: "Task Explorer Pack",
+    rewardType: "Task Quest Conversion",
+    category: "Tasks",
+    badge: "Standard Tier",
     requiredGems: 39,
-    receiveVEs: 201,
-    icon: "play-circle",
-    badge: "Flexible",
+    receiveVEs: 168,
+    multiplier: "4.31x",
+    explanation: "Convert your task rewards into official VELOOP virtual currency.",
+    image: "/images/game_coin.jpeg",
+    outputImage: "/images/single_VEs.jpeg",
+    bonusText: "+5% Vault XP",
+    cooldown: "Instant credit"
   },
   {
-    id: "exchange-03",
-    type: "gem-to-ve",
-    label: "Daily Bonus Conversion",
-    description: "Turn your daily login bonus Gems into VEs.",
-    requiredGems: 50,
-    receiveVEs: 268,
-    icon: "gift",
+    id: "conv-03",
+    title: "Active Earner Vault",
+    rewardType: "Vault Bundle",
+    category: "Vault",
     badge: "Best Value",
-    highlight: true,
+    requiredGems: 75,
+    receiveVEs: 360,
+    multiplier: "4.80x",
+    explanation: "Bundle your accumulated Gems for higher VE reward efficiency.",
+    image: "/images/multi_gems.jpeg",
+    outputImage: "/images/multi_VEs.jpeg",
+    bonusText: "+10 SVEs Bonus",
+    bonusSVEs: 10,
+    cooldown: "No limit"
   },
   {
-    id: "exchange-04",
-    type: "gem-to-ve",
-    label: "Survey Reward Conversion",
-    description: "Convert Gems earned from completed surveys into VEs.",
-    requiredGems: 65,
-    receiveVEs: 350,
-    icon: "clipboard-check",
-    badge: "Popular",
+    id: "conv-04",
+    title: "Gamer's Spin Bundle",
+    rewardType: "Gamer Special",
+    category: "Gaming",
+    badge: "Includes Spin Ticket",
+    requiredGems: 120,
+    receiveVEs: 650,
+    multiplier: "5.42x",
+    explanation: "Includes a Lucky Spin voucher to spin and win extra rewards.",
+    image: "/images/signle_spin.jpeg",
+    outputImage: "/images/multi_VEs.jpeg",
+    bonusText: "+1 Spin Voucher",
+    cooldown: "Weekly special"
   },
   {
-    id: "exchange-05",
-    type: "gem-to-ve",
-    label: "Social Share Conversion",
-    description: "Convert Gems earned from sharing and referrals into VEs.",
-    requiredGems: 20,
-    receiveVEs: 102,
-    icon: "share",
-    badge: "Recommended",
+    id: "conv-05",
+    title: "High Roller Token Vault",
+    rewardType: "VIP Milestone",
+    category: "VIP",
+    badge: "Golden Token",
+    requiredGems: 250,
+    receiveVEs: 1420,
+    multiplier: "5.68x",
+    explanation: "Premium conversion bundle for high-activity collectors.",
+    image: "/images/Signle_Token.jpeg",
+    outputImage: "/images/multi_VEs.jpeg",
+    bonusText: "+1 Golden Token",
+    cooldown: "VIP tier"
   },
   {
-    id: "exchange-06",
-    type: "gem-to-ve",
-    label: "App Task Conversion",
-    description: "Convert Gems earned from completed app tasks into VEs.",
-    requiredGems: 45,
-    receiveVEs: 235,
-    icon: "smartphone",
-    badge: "Popular",
-  },
+    id: "conv-06",
+    title: "Grand Master Vault",
+    rewardType: "Elite Tier Vault",
+    category: "Elite",
+    badge: "Maximum Multiplier",
+    requiredGems: 500, // Demonstrates Insufficient Gems state when user balance is 420
+    receiveVEs: 3100,
+    multiplier: "6.20x",
+    explanation: "Our highest reward vault package with maximum VE output rate.",
+    image: "/images/tap_coin.jpeg",
+    outputImage: "/images/multi_VEs.jpeg",
+    bonusText: "+50 SVEs & Elite Badge",
+    bonusSVEs: 50,
+    cooldown: "Milestone unlocked"
+  }
 ];
 
-export const exchangeHistory = [
-  { id: "hist-01", date: "Today", requiredGems: 28, receiveVEs: 144, status: "completed" },
-  { id: "hist-02", date: "Yesterday", requiredGems: 39, receiveVEs: 201, status: "completed" },
-  { id: "hist-03", date: "18 Aug", requiredGems: 25, receiveVEs: 120, status: "completed" },
-  { id: "hist-04", date: "14 Aug", requiredGems: 50, receiveVEs: 268, status: "failed" },
+export const initialHistory = [
+  {
+    id: "hist-01",
+    date: "Today, 11:42 AM",
+    requiredGems: 28,
+    receiveVEs: 151,
+    title: "Daily Gem Conversion",
+    status: "completed", // 'completed', 'processing', 'failed'
+    statusLabel: "Completed",
+    txRef: "VLP-88419"
+  },
+  {
+    id: "hist-02",
+    date: "Yesterday, 04:15 PM",
+    requiredGems: 39,
+    receiveVEs: 168,
+    title: "Task Explorer Pack",
+    status: "completed",
+    statusLabel: "Completed",
+    txRef: "VLP-88102"
+  },
+  {
+    id: "hist-03",
+    date: "18 Aug 2026, 02:30 PM",
+    requiredGems: 25,
+    receiveVEs: 120,
+    title: "Starter Conversion",
+    status: "completed",
+    statusLabel: "Completed",
+    txRef: "VLP-87421"
+  }
 ];
 
 export const exchangeRules = [
-  "Only eligible Gems can be exchanged for VEs.",
-  "Exchange rates are predefined by VELoop Rewards and may be updated.",
-  "Available conversions may vary based on your account activity.",
-  "A successful conversion cannot be duplicated or reversed.",
-  "Your balance updates automatically after a successful conversion.",
-  "All platform terms and eligibility rules apply.",
+  {
+    id: "rule-1",
+    title: "Eligible Gems Only",
+    description: "Only verified Gems earned through authentic activities, ads, and quests can be converted."
+  },
+  {
+    id: "rule-2",
+    title: "Predefined Exchange Rates",
+    description: "Exchange rates are fixed by VELOOP Rewards. There are zero slippage or hidden processing fees."
+  },
+  {
+    id: "rule-3",
+    title: "Package Availability",
+    description: "Available conversions and bonus allocations may vary according to user tier and seasonal campaigns."
+  },
+  {
+    id: "rule-4",
+    title: "No Duplicate Execution",
+    description: "Every conversion is secured by unique session tokens to prevent accidental double-clicks."
+  },
+  {
+    id: "rule-5",
+    title: "Instant Balance Credit",
+    description: "Converted VEs are credited immediately to your virtual reward wallet upon confirmation."
+  },
+  {
+    id: "rule-6",
+    title: "Standard Platform Terms",
+    description: "VEs and SVEs are virtual reward currencies governed strictly by VELOOP Rewards platform rules."
+  }
 ];
 
 export const howExchangeWorks = [
-  { step: "01", title: "Earn Gems", description: "Complete tasks, watch ads, or take surveys to earn Gems." },
-  { step: "02", title: "Choose a conversion", description: "Pick an available Gems-to-VEs conversion." },
-  { step: "03", title: "Review the exchange", description: "Check exactly how many VEs you'll receive." },
-  { step: "04", title: "Confirm", description: "Approve the conversion in one tap." },
-  { step: "05", title: "Receive VEs", description: "Your VE balance updates right away." },
+  {
+    step: "01",
+    title: "Earn Gems",
+    description: "Complete tasks, play games, and watch ads to build your Gem reserve."
+  },
+  {
+    step: "02",
+    title: "Choose Conversion",
+    description: "Select an eligible reward package based on your available Gems."
+  },
+  {
+    step: "03",
+    title: "Review Exchange",
+    description: "Inspect the exact VE return and check your post-conversion balance."
+  },
+  {
+    step: "04",
+    title: "Confirm",
+    description: "Click confirm with zero gas or trading fees; anti-duplicate lock protects your action."
+  },
+  {
+    step: "05",
+    title: "Receive VEs",
+    description: "VEs land in your balance instantly, ready for gift cards, cashouts, or tier upgrades."
+  }
 ];
 
-export const infoExplainers = {
+export const earnMoreOptions = [
+  {
+    id: "earn-ads",
+    title: "Watch Sponsored Ads",
+    reward: "+15 - 30 Gems",
+    time: "30s each",
+    icon: "play-circle",
+    tag: "High Yield"
+  },
+  {
+    id: "earn-tap",
+    title: "Daily Tap & Quests",
+    reward: "+50 Gems",
+    time: "Instant",
+    icon: "zap",
+    tag: "Daily Streak"
+  },
+  {
+    id: "earn-games",
+    title: "Play Partner Games",
+    reward: "+80 - 200 Gems",
+    time: "5-10 mins",
+    icon: "gamepad-2",
+    tag: "Fun"
+  },
+  {
+    id: "earn-survey",
+    title: "Complete Quick Polls",
+    reward: "+40 Gems",
+    time: "3 mins",
+    icon: "check-square",
+    tag: "Fast"
+  }
+];
+
+export const infoDefinitions = {
   gems: {
     title: "What are Gems?",
-    body: "Gems are reward credits you earn through eligible activities on VELoop Rewards, like watching ads, playing games, or completing tasks.",
+    content: "Gems are reward credits earned through eligible activities on VELOOP Rewards (watching ads, completing quests, gaming, and daily check-ins). Gems are exclusively converted into VEs."
   },
   ves: {
     title: "What are VEs?",
-    body: "VEs are VELoop Rewards' virtual reward currency. You can use eligible VEs toward redemption options according to platform rules.",
+    content: "VEs are VELOOP Rewards' primary virtual reward currency. They can be redeemed for gift vouchers, direct cashouts (PayPal/Paytm), or exclusive store perks."
   },
-  rate: {
-    title: "How is the conversion set?",
-    body: "Each conversion has a fixed Gems-to-VEs value set by VELoop Rewards. The amount you'll receive is always shown before you confirm.",
+  sves: {
+    title: "What are SVEs?",
+    content: "SVEs (Silver VEs) are bonus reward tokens granted during high-tier conversion vault packs. They unlock VIP multipliers and spin wheel bonuses."
+  },
+  tokens: {
+    title: "What are Golden Tokens?",
+    content: "Golden Tokens are collectible pass items used to access elite conversion tiers and raffle draws."
+  },
+  exchangeRate: {
+    title: "Exchange Rate Policy",
+    content: "Conversion rates are predefined by VELOOP Rewards. This is strictly a reward conversion system and NOT a financial exchange or volatile cryptocurrency market."
   },
   rules: {
-    title: "Exchange rules",
-    body: "Conversions use your available Gems balance, follow predefined rates, and cannot be duplicated once completed.",
-  },
+    title: "Exchange Rules",
+    content: "Conversions are final and irreversible. Anti-duplicate safeguards ensure each request is processed exactly once."
+  }
 };
